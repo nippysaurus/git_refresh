@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+needs_update()
+{
+  find tracking -mmin -$2 -type f | grep $1
+}
+
+#update()
+#{
+#  pushd $1
+#
+#  git fetch origin
+#
+#  popd
+#
+#  touch tracking/$2
+#}
+
+hash=`md5 -q -s $1`
+
+if ! needs_update $hash $2; then
+  echo "===== NEEDS UPDATE ====="
+  #update $1 $hash
+else
+  echo "===== NO UPDATE NEEDED ====="
+fi
+
+
